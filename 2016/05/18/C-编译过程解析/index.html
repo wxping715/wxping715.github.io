@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="飞翔的猫">
 <meta property="og:description" content="本篇文章解析C++的编译过程，并且说明如何编译成静态库，动态库以及动态库的加载过程。">
 <meta property="og:image" content="http://faculty.cs.niu.edu/~mcmahon/CS241/Images/compile.png">
-<meta property="og:updated_time" content="2016-05-18T14:27:55.000Z">
+<meta property="og:updated_time" content="2016-05-18T14:51:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++编译过程解析">
 <meta name="twitter:description" content="本篇文章解析C++的编译过程，并且说明如何编译成静态库，动态库以及动态库的加载过程。">
@@ -409,11 +409,14 @@
 </li>
 <li>将动态库文件复制到<code>/lib</code>或者<code>/usr/lib</code>中。</li>
 </ol>
+<p>通常情况下，第一种方式是不建议在生产环境中使用的, 由于<code>LD_LIBRARY_PATH</code>是全局的变量, 很多程序都依赖于该变量会使得一旦<code>LD_LIBRARY_PATH</code>配置错误就会影响大量的程序。通常, <code>LD_LIBRARY_PATH</code>变量主要用来临时配置动态库路径或者临时测试使用。另外一种说法是第二种方式与第一种方式是可能会产生同样的问题，也不被建议使用。</p>
+<p>规范建议的使用方式是通过<code>g++ -rpath=your_path</code>参数指定运行环境, 而使用<code>-Lyour_path</code>指定链接时的环境,这种做法会减少对其他程序的影响。<br>示例程序编译运行的建议做法为:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ ExecMathFuncsLib.cpp -L./lib -lmathfuncs -rpath=./lib</span><br></pre></td></tr></table></figure></p>
 <h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ol>
 <li><a href="http://faculty.cs.niu.edu/~mcmahon/CS241/Notes/compile.html" target="_blank" rel="external">The C++ compilation process</a></li>
 <li><a href="http://stackoverflow.com/questions/6264249/how-does-the-compilation-linking-process-work" target="_blank" rel="external">How does the compilation/linking process work?</a></li>
 <li><a href="http://www.tenouk.com/ModuleW.html" target="_blank" rel="external">COMPILER, ASSEMBLER, LINKER AND LOADER: A BRIEF STORY</a></li>
 <li><a href="https://msdn.microsoft.com/en-us/library/ms235627.aspx#BKMK_CreateLibProject" target="_blank" rel="external">Walkthrough: Creating and Using a Static Library (C++)</a></li>
+<li><a href="http://www.ituring.com.cn/article/22101" target="_blank" rel="external">Why LD_LIBRARY_PATH is bad</a></li>
 </ol>
 
       
