@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-05-18T14:51:33.000Z</updated>
+  <updated>2016-05-19T11:17:08.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,87 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>g++常用编译选项</title>
+    <link href="http://yoursite.com/2016/05/19/g-%E5%B8%B8%E7%94%A8%E7%BC%96%E8%AF%91%E9%80%89%E9%A1%B9/"/>
+    <id>http://yoursite.com/2016/05/19/g-常用编译选项/</id>
+    <published>2016-05-19T08:46:27.000Z</published>
+    <updated>2016-05-19T11:17:08.000Z</updated>
+    
+    <content type="html">&lt;p&gt;本篇博文主要汇总总结&lt;code&gt;g++&lt;/code&gt;和&lt;code&gt;gcc&lt;/code&gt;编译器常用的编译选项，以备以后查看。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;编译过程选项&quot;&gt;&lt;a href=&quot;#编译过程选项&quot; class=&quot;headerlink&quot; title=&quot;编译过程选项&quot;&gt;&lt;/a&gt;编译过程选项&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-E&lt;/code&gt;: 将源文件进行预处理，不进行编译和链接，默认输出为终端&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-S&lt;/code&gt;: 将源文件编译生成汇编文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-c&lt;/code&gt;: 将源文件编译生成目标文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-o&lt;/code&gt;: 将源文件或者目标文件编译生成可执行文件, &lt;code&gt;g++ -o outputname x1.cpp(x.o)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-Wall&lt;/code&gt;: 显示编译过程中所有的警告信息&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-save-temps&lt;/code&gt;: 保存编译过程中生成的所有中间文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-g&lt;/code&gt;: 在可执行文件中加入标准调试信息，用于程序调试&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-On&lt;/code&gt;: 编译优化，其中n为优化级别,范围为0-3, &lt;code&gt;O3&lt;/code&gt;是最高优化级别&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-Idir&lt;/code&gt;: 将目录&lt;code&gt;dir&lt;/code&gt;所在的文件夹加入头文件搜索范围&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-Ldir&lt;/code&gt;: 将目录&lt;code&gt;dir&lt;/code&gt;所在的文件加入库文件搜索范围&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-lname&lt;/code&gt;: 链接时使用&lt;code&gt;libname.so&lt;/code&gt;的动态库或者&lt;code&gt;libname.a&lt;/code&gt;静态库&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Dname[=var]&lt;/code&gt;: 定义宏变量&lt;code&gt;name[=var]&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;库文件选项&quot;&gt;&lt;a href=&quot;#库文件选项&quot; class=&quot;headerlink&quot; title=&quot;库文件选项&quot;&gt;&lt;/a&gt;库文件选项&lt;/h3&gt;&lt;h4 id=&quot;静态库文件选项&quot;&gt;&lt;a href=&quot;#静态库文件选项&quot; class=&quot;headerlink&quot; title=&quot;静态库文件选项&quot;&gt;&lt;/a&gt;静态库文件选项&lt;/h4&gt;&lt;p&gt;生成静态库文件命令&lt;code&gt;ar&lt;/code&gt;选项&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-a&lt;/code&gt;: 位置移动的指定器, 与&lt;code&gt;-r&lt;/code&gt;或者&lt;code&gt;-m&lt;/code&gt;一同使用, 文件将会被移动到指定的位置索引之后&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-b&lt;/code&gt;: 位置移动的指定器, 与&lt;code&gt;-r&lt;/code&gt;或者&lt;code&gt;-m&lt;/code&gt;一同使用, 文件将会被移动到指定的位置索引之前&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-c&lt;/code&gt;: 创建库文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-d&lt;/code&gt;: 删除库文件中指定的目标文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-i&lt;/code&gt;: 等同于&lt;code&gt;-b&lt;/code&gt;选项&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-m&lt;/code&gt;: 在库文件中移动指定的库文件位置，如果&lt;code&gt;-a&lt;/code&gt;或者&lt;code&gt;-b&lt;/code&gt;指定的话，那么移动库文件到该位置，否则移动到文件末尾&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-p&lt;/code&gt;: 将指定的目标文件输出到标准输出，如果没有指定的话，则输出全部的目标文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-q&lt;/code&gt;: 快速生成静态库文件，不管目标文件是否已经包含在库文件中, 比&lt;code&gt;-r&lt;/code&gt;要快很多，但是库文件会有冗余&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-S&lt;/code&gt;: 打包静态库时不生成符号表，添加该选项生成的静态库文件无法直接使用&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-t&lt;/code&gt;: 列出库文件中指定的目标文件列表，如果没有指定，则列出所有的目标文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-r&lt;/code&gt;: 替换或者在库文件末尾添加目标文件，如果库文件不存在，那么则创建库文件; 如果目标文件已存在，那么则替换成目标文件; 如果目标文件不存在，则添加到文件末尾&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-u&lt;/code&gt;: 更新库文件中的目标文件，与&lt;code&gt;-r&lt;/code&gt;选项共用时，只有更改比较新的目标文件才会被添加到库文件中; 与&lt;code&gt;-x&lt;/code&gt;选项共用时, 只有比文件中已有的目标文件更新时才会解压&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-v&lt;/code&gt;: 显示打包过程中的输出信息&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-x&lt;/code&gt;: 将库文件中的指定的目标文件解压到当前目录，如果没有指定，则解压所有的目标文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;生成静态库文件的方式如下:&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ g++ -c x1.cpp x2.cpp ......&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ ar crv libname.a x1.o x2.o&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;在编译生成动态库的目标文件时，必须加上选项&lt;code&gt;-fPIC&lt;/code&gt;, 表示生成位置无关的目标代码，打包成动态库文件的生成方式如下:&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ g++ -c &lt;span class=&quot;_&quot;&gt;-f&lt;/span&gt;PIC x1.cpp x2.cpp&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ g++ -shared -o libname.so x1.o x2.o&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;也可以直接从源文件生成动态共享库&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ g++ &lt;span class=&quot;_&quot;&gt;-f&lt;/span&gt;PIC -shared -o libname.so x1.cpp x2.cpp&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&quot;常用命令&quot;&gt;&lt;a href=&quot;#常用命令&quot; class=&quot;headerlink&quot; title=&quot;常用命令&quot;&gt;&lt;/a&gt;常用命令&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;在Linux平台指定使用&lt;code&gt;C++&lt;/code&gt;标准库执行命令&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;g++ -std=c++11 input.cxx -o a.out&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;g++ -std=gnu++11 input.cxx -o a.out&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Mac OS X&lt;/code&gt; before Mavericks&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;g++ -std=c++11 -stdlib=libc++ input.cxx -o a.out&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;g++ -std=gnu++11 -stdlib=libc++ input.cxx -o a.out&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;clang++ -std=c++11 -stdlib=libc++ input.cxx -o a.out&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;clang++ -std=gnu++11 -stdlib=libc++ input.cxx -o a.out&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Mac OS X&lt;/code&gt; since Mavericks&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;clang++ -std=c++11 input.cxx -o a.out&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;clang++ -std=gnu++11 input.cxx -o a.out&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;参考&quot;&gt;&lt;a href=&quot;#参考&quot; class=&quot;headerlink&quot; title=&quot;参考&quot;&gt;&lt;/a&gt;参考&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.zhli.net/prog-algo/gcc-commonly-used-flags/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GCC 常用编译选项及相关工具&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/19774778/when-is-it-necessary-to-use-use-the-flag-stdlib-libstdc&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;When is it necessary to use use the flag -stdlib=libstdc++?&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本篇博文主要汇总总结&lt;code&gt;g++&lt;/code&gt;和&lt;code&gt;gcc&lt;/code&gt;编译器常用的编译选项，以备以后查看。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
+    
+      <category term="G++" scheme="http://yoursite.com/tags/G/"/>
+    
+      <category term="编译器" scheme="http://yoursite.com/tags/%E7%BC%96%E8%AF%91%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
     <title>C++编译过程解析</title>
     <link href="http://yoursite.com/2016/05/18/C-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%A7%A3%E6%9E%90/"/>
     <id>http://yoursite.com/2016/05/18/C-编译过程解析/</id>
     <published>2016-05-18T09:35:04.000Z</published>
-    <updated>2016-05-18T14:51:33.000Z</updated>
+    <updated>2016-05-19T08:46:51.000Z</updated>
     
     <content type="html">&lt;p&gt;本篇文章解析&lt;code&gt;C++&lt;/code&gt;的编译过程，并且说明如何编译成静态库，动态库以及动态库的加载过程。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&quot;C-编译过程&quot;&gt;&lt;a href=&quot;#C-编译过程&quot; class=&quot;headerlink&quot; title=&quot;C++ 编译过程&quot;&gt;&lt;/a&gt;C++ 编译过程&lt;/h3&gt;&lt;p&gt;目前C++的编译过程包括四个阶段，分别为&lt;code&gt;Proprocessing&lt;/code&gt;, &lt;code&gt;Compilation&lt;/code&gt;, &lt;code&gt;Assembly&lt;/code&gt;和&lt;code&gt;Linking&lt;/code&gt;四个阶段, 四个阶段对应使用的工具分别是&lt;code&gt;preprocessor&lt;/code&gt;, &lt;code&gt;compiler&lt;/code&gt;, &lt;code&gt;assembler&lt;/code&gt;和&lt;code&gt;linker&lt;/code&gt;. 编译的四个阶段如下图所示:&lt;br&gt;&lt;img src=&quot;http://faculty.cs.niu.edu/~mcmahon/CS241/Images/compile.png&quot; alt=&quot;C++ Compile Process&quot;&gt;&lt;/p&gt;
