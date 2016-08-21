@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-05-19T11:17:08.000Z</updated>
+  <updated>2016-06-28T14:09:34.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,145 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java多线程编程-线程基本操作</title>
+    <link href="http://yoursite.com/2016/06/28/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B-%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B/"/>
+    <id>http://yoursite.com/2016/06/28/Java多线程编程-创建线程/</id>
+    <published>2016-06-28T12:25:05.000Z</published>
+    <updated>2016-06-28T14:09:34.000Z</updated>
+    
+    <content type="html">&lt;p&gt;从本节开始，将通过一系列的文章博客介绍Java并发编程的相关内容。此处为第一篇，介绍Java多线程中线程的基本管理，包括线程创建，sleep以及中断等。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;线程&quot;&gt;&lt;a href=&quot;#线程&quot; class=&quot;headerlink&quot; title=&quot;线程&quot;&gt;&lt;/a&gt;线程&lt;/h3&gt;&lt;p&gt;&lt;code&gt;Java&lt;/code&gt;语言中采用的单线程模型，也就是在程序中不手动唤起新的线程时，默认就采用单个线程运行任务。需要注意的是，虽然只是采用单线程运行任务，但并不代表只启动一个线程，比如还会有线程负责垃圾回收等。&lt;br&gt;在执行&lt;code&gt;Java&lt;/code&gt;命令时，操作系统默认会启动一个&lt;code&gt;JVM&lt;/code&gt;进程，进程会同时创建几个线程，其中的主线程负责任务运行。&lt;/p&gt;
+&lt;p&gt;线程共有如下的6种状态:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;New(新创建)&lt;/li&gt;
+&lt;li&gt;Runnable(可运行的)&lt;/li&gt;
+&lt;li&gt;Blocked (被阻塞的)&lt;/li&gt;
+&lt;li&gt;Waiting (等待中的)&lt;/li&gt;
+&lt;li&gt;Timed Waiting (计时等待的)&lt;/li&gt;
+&lt;li&gt;Terminated (终止的)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;各个状态之间的线程转移和切换方式如下图。&lt;br&gt;&lt;img src=&quot;/2016/06/28/Java多线程编程-创建线程/thread-state-diagram.png&quot; alt=&quot;Thread State Diagram&quot; title=&quot;Thread State Diagram&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;定义与创建线程&quot;&gt;&lt;a href=&quot;#定义与创建线程&quot; class=&quot;headerlink&quot; title=&quot;定义与创建线程&quot;&gt;&lt;/a&gt;定义与创建线程&lt;/h3&gt;&lt;h4 id=&quot;定义线程&quot;&gt;&lt;a href=&quot;#定义线程&quot; class=&quot;headerlink&quot; title=&quot;定义线程&quot;&gt;&lt;/a&gt;定义线程&lt;/h4&gt;&lt;p&gt;在&lt;code&gt;Java&lt;/code&gt;中，创建新的线程可以有两种方式，实现&lt;code&gt;Runnable&lt;/code&gt;接口或者继承&lt;code&gt;Thread&lt;/code&gt;类.&lt;/p&gt;
+&lt;p&gt;实现&lt;code&gt;Runnable&lt;/code&gt;接口需要重写&lt;code&gt;run&lt;/code&gt;方法，&lt;code&gt;run&lt;/code&gt;方法定义了线程需要执行的任务。&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;MyThread&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Runnable&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;meta&quot;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;继承自&lt;code&gt;Thread&lt;/code&gt;类也需要重写&lt;code&gt;run&lt;/code&gt;方法，定义线程执行的任务。&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;MyThread&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Thread&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;meta&quot;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;使用两种方式都能创建新的线程，由于&lt;code&gt;Java&lt;/code&gt;的单继承特性，如果需要从多个类进行继承，那么只能使用&lt;code&gt;Runnable&lt;/code&gt;接口实现新的线程。&lt;/p&gt;
+&lt;h4 id=&quot;创建线程&quot;&gt;&lt;a href=&quot;#创建线程&quot; class=&quot;headerlink&quot; title=&quot;创建线程&quot;&gt;&lt;/a&gt;创建线程&lt;/h4&gt;&lt;p&gt;声明一个新的线程对象即创建了一个新的线程, 创建完线程之后，线程的状态为&lt;code&gt;New&lt;/code&gt;, 表示是新创建的, 还需要进行初始化才能执行。&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;MyThread thread = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; MyThread()&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;启动线程&quot;&gt;&lt;a href=&quot;#启动线程&quot; class=&quot;headerlink&quot; title=&quot;启动线程&quot;&gt;&lt;/a&gt;启动线程&lt;/h3&gt;&lt;p&gt;启动线程时需要先创建该线程的一个实例，然后调用线程的&lt;code&gt;start&lt;/code&gt;方法，系统会自动创建一个新的线程并调用该线程的&lt;code&gt;run&lt;/code&gt;方法执行。示例代码如下：&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(String[] args)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        MyThread thread = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; MyThread();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        thread.start();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;特别需要强调的是&lt;/strong&gt;, 启动新的线程必须调用&lt;code&gt;start&lt;/code&gt;方法, 而不是&lt;code&gt;run&lt;/code&gt;方法。直接调用&lt;code&gt;run&lt;/code&gt;方法只会执行当前主线程的任务，而不是启动新的线程，与普通的方法调用没有区别。&lt;/p&gt;
+&lt;p&gt;一旦调用&lt;code&gt;start&lt;/code&gt;方法，线程的状态就变为&lt;code&gt;runnable&lt;/code&gt;状态，表示线程可以运行，但是线程是否能运行取决于操作系统是否提供给足够的资源。目前操作系统的线程调度方式分为&lt;code&gt;抢占式线程调度&lt;/code&gt;和&lt;code&gt;协作式线程调度&lt;/code&gt;，前者是当线程使用完时间片之后，就会被剥夺控制权；后者是只有线程主动放弃控制权时，才会失去控制权。&lt;/p&gt;
+&lt;h3 id=&quot;被阻塞线程和等待线程&quot;&gt;&lt;a href=&quot;#被阻塞线程和等待线程&quot; class=&quot;headerlink&quot; title=&quot;被阻塞线程和等待线程&quot;&gt;&lt;/a&gt;被阻塞线程和等待线程&lt;/h3&gt;&lt;p&gt;当线程处于&lt;code&gt;被阻塞&lt;/code&gt;或者&lt;code&gt;等待&lt;/code&gt;状态时，线程处于不活动状态，此时处于消耗资源最少的状态。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当线程试图获取一个资源的锁对象时，而该锁被其他线程持有时，线程将进入&lt;code&gt;阻塞状态&lt;/code&gt;。当其他对象释放了该锁，并且线程调度器将控制权交给该线程的时候，线程才会继续运行，变成&lt;code&gt;非阻塞&lt;/code&gt;状态。&lt;/li&gt;
+&lt;li&gt;当线程等待另外一个线程通知调度器状态时, 线程进入&lt;code&gt;等待状态&lt;/code&gt;。在调用&lt;code&gt;Thread.wait&lt;/code&gt;或者&lt;code&gt;Thread.join&lt;/code&gt;方法之后，线程进入等待状态，将会释放线程所占有的锁，并交出CPU执行控制权。&lt;/li&gt;
+&lt;li&gt;当调用&lt;code&gt;wait&lt;/code&gt;方法或者&lt;code&gt;join&lt;/code&gt;方法以及&lt;code&gt;sleep&lt;/code&gt;方法指定超时时间时，线程进入&lt;code&gt;计时等待&lt;/code&gt;状态，该状态一直保持到计时结束或者调度器主动发送通知调度。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;sleep方法&quot;&gt;&lt;a href=&quot;#sleep方法&quot; class=&quot;headerlink&quot; title=&quot;sleep方法&quot;&gt;&lt;/a&gt;sleep方法&lt;/h4&gt;&lt;p&gt;&lt;code&gt;sleep&lt;/code&gt;方法的调用方式如下：&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;sleep(&lt;span class=&quot;keyword&quot;&gt;long&lt;/span&gt; millis)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sleep(&lt;span class=&quot;keyword&quot;&gt;long&lt;/span&gt; millis,&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; nanoseconds)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//第一个参数指定的是毫秒，第二个参数指定的是纳秒&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sleep&lt;/code&gt;方法使得线程睡眠，交出CPU控制权，但是并不释放锁。只能睡眠时间结束之后，才能回到&lt;code&gt;Runnable&lt;/code&gt;状态。&lt;/p&gt;
+&lt;h4 id=&quot;yield方法&quot;&gt;&lt;a href=&quot;#yield方法&quot; class=&quot;headerlink&quot; title=&quot;yield方法&quot;&gt;&lt;/a&gt;yield方法&lt;/h4&gt;&lt;p&gt;&lt;code&gt;yield&lt;/code&gt;方法与&lt;code&gt;sleep&lt;/code&gt;方法类似，是使得CPU交出控制权并执行其他任务，同样也不会释放锁。与&lt;code&gt;sleep&lt;/code&gt;方法不同的是，&lt;code&gt;yield&lt;/code&gt;方法不能控制具体交出CPU的时间。&lt;/p&gt;
+&lt;h4 id=&quot;wait方法&quot;&gt;&lt;a href=&quot;#wait方法&quot; class=&quot;headerlink&quot; title=&quot;wait方法&quot;&gt;&lt;/a&gt;wait方法&lt;/h4&gt;&lt;p&gt;调用&lt;code&gt;wait&lt;/code&gt;方法会让进程进入到阻塞状态, 并且释放进程占用的锁，交出CPU的执行权。&lt;/p&gt;
+&lt;h4 id=&quot;join方法&quot;&gt;&lt;a href=&quot;#join方法&quot; class=&quot;headerlink&quot; title=&quot;join方法&quot;&gt;&lt;/a&gt;join方法&lt;/h4&gt;&lt;p&gt;&lt;code&gt;join&lt;/code&gt;方法将指定的线程加入到当前线程中执行，直到该线程执行完或者执行一段时间之后再回到调用线程继续执行，&lt;code&gt;join&lt;/code&gt;方法的三个版本。&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;join()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;join(&lt;span class=&quot;keyword&quot;&gt;long&lt;/span&gt; millis)     &lt;span class=&quot;comment&quot;&gt;//参数为毫秒&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;join(&lt;span class=&quot;keyword&quot;&gt;long&lt;/span&gt; millis,&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; nanoseconds)    &lt;span class=&quot;comment&quot;&gt;//第一参数为毫秒，第二个参数为纳秒&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;调用&lt;code&gt;join&lt;/code&gt;方法实则是调用了&lt;code&gt;wait&lt;/code&gt;方法，因此&lt;code&gt;join&lt;/code&gt;方法也使得进程进入到阻塞状态。&lt;/p&gt;
+&lt;h3 id=&quot;终止线程&quot;&gt;&lt;a href=&quot;#终止线程&quot; class=&quot;headerlink&quot; title=&quot;终止线程&quot;&gt;&lt;/a&gt;终止线程&lt;/h3&gt;&lt;p&gt;调用&lt;code&gt;interrupt&lt;/code&gt;方法可以使得线程进入到中断状态。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;从本节开始，将通过一系列的文章博客介绍Java并发编程的相关内容。此处为第一篇，介绍Java多线程中线程的基本管理，包括线程创建，sleep以及中断等。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
+      <category term="并发" scheme="http://yoursite.com/tags/%E5%B9%B6%E5%8F%91/"/>
+    
+      <category term="线程" scheme="http://yoursite.com/tags/%E7%BA%BF%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux命令-losf</title>
+    <link href="http://yoursite.com/2016/05/24/Linux%E5%91%BD%E4%BB%A4-losf/"/>
+    <id>http://yoursite.com/2016/05/24/Linux命令-losf/</id>
+    <published>2016-05-24T03:26:07.000Z</published>
+    <updated>2016-05-24T03:34:56.000Z</updated>
+    
+    <content type="html">&lt;p&gt;lsof(list open files)是一个列出当前系统打开文件的工具。在linux环境下，任何事物都以文件的形式存在，通过文件不仅仅可以访问常规数据，还可以访问网络连接和硬件。所以如传输控制协议 (TCP) 和用户数据报协议 (UDP) 套接字等，系统在后台都为该应用程序分配了一个文件描述符，无论这个文件的本质如何，该文件描述符为应用程序与基础操作系统之间的交互提供了通用接口。因为应用程序打开文件的描述符列表提供了大量关于这个应用程序本身的信息，因此通过lsof工具能够查看这个列表对系统监测以及排错将是很有帮助的。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h3 id=&quot;命令使用方式&quot;&gt;&lt;a href=&quot;#命令使用方式&quot; class=&quot;headerlink&quot; title=&quot;命令使用方式&quot;&gt;&lt;/a&gt;命令使用方式&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;lsof [options] [filename]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h4 id=&quot;输出格式&quot;&gt;&lt;a href=&quot;#输出格式&quot; class=&quot;headerlink&quot; title=&quot;输出格式&quot;&gt;&lt;/a&gt;输出格式&lt;/h4&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;COMMAND     PID  USER   FD     TYPE             DEVICE  SIZE/OFF     NODE NAME&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;loginwind    89 talus  cwd      DIR                1,4      1122        2 /&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;loginwind    89 talus  txt      REG                1,4    840176   351678 /System/Library/CoreServices/loginwindow.app/Contents/MacOS/loginwindow&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;loginwind    89 talus  txt      REG                1,4      1623    42437 /System/Library/PrivateFrameworks/LoginUIKit.framework/Versions/A/Resources/keyboard.pdf&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;loginwind    89 talus  txt      REG                1,4     50744 24773259 /private/var/folders/dj/pv392n3x6w7g5022jqc3lzd80000gn/C/mds/mdsDirectory.db&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;loginwind    89 talus  txt      REG                1,4      1960    20304 /System/Library/ColorSync/Profiles/Generic RGB Profile.icc&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;loginwind    89 talus  txt      REG                1,4  24438480    50043 /usr/share/icu/icudt53l.dat&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;loginwind    89 talus  txt      REG                1,4    137152   147158 /System/Library/LoginPlugins/DisplayServices.loginPlugin/Contents/MacOS/DisplayServices&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;loginwind    89 talus  txt      REG                1,4    109920   146802 /System/Library/LoginPlugins/FSDisconnect.loginPlugin/Contents/MacOS/FSDisconnect&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;loginwind    89 talus  txt      REG                1,4   3759122    23132 /System/Library/CoreServices/SystemAppearance.bundle/Contents/Resources/SystemAppearance.car&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;输出中各项参数如下:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;command&lt;/code&gt;: 显示打开文件的命令&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PID&lt;/code&gt;: 进程号&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;USER&lt;/code&gt;: 用户&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;FD&lt;/code&gt;: 文件描述符号&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;选项和参数&quot;&gt;&lt;a href=&quot;#选项和参数&quot; class=&quot;headerlink&quot; title=&quot;选项和参数&quot;&gt;&lt;/a&gt;选项和参数&lt;/h3&gt;&lt;h3 id=&quot;部分实例&quot;&gt;&lt;a href=&quot;#部分实例&quot; class=&quot;headerlink&quot; title=&quot;部分实例&quot;&gt;&lt;/a&gt;部分实例&lt;/h3&gt;&lt;h3 id=&quot;参考&quot;&gt;&lt;a href=&quot;#参考&quot; class=&quot;headerlink&quot; title=&quot;参考&quot;&gt;&lt;/a&gt;参考&lt;/h3&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;lsof(list open files)是一个列出当前系统打开文件的工具。在linux环境下，任何事物都以文件的形式存在，通过文件不仅仅可以访问常规数据，还可以访问网络连接和硬件。所以如传输控制协议 (TCP) 和用户数据报协议 (UDP) 套接字等，系统在后台都为该应用程序分配了一个文件描述符，无论这个文件的本质如何，该文件描述符为应用程序与基础操作系统之间的交互提供了通用接口。因为应用程序打开文件的描述符列表提供了大量关于这个应用程序本身的信息，因此通过lsof工具能够查看这个列表对系统监测以及排错将是很有帮助的。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Linux命令" scheme="http://yoursite.com/categories/Linux%E5%91%BD%E4%BB%A4/"/>
+    
+    
+      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+      <category term="Bash" scheme="http://yoursite.com/tags/Bash/"/>
+    
+      <category term="lsof" scheme="http://yoursite.com/tags/lsof/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux-部分常用命令总结</title>
+    <link href="http://yoursite.com/2016/05/23/Linux-%E9%83%A8%E5%88%86%E5%86%B7%E9%97%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/2016/05/23/Linux-部分冷门命令总结/</id>
+    <published>2016-05-23T02:44:51.000Z</published>
+    <updated>2016-05-24T03:25:32.000Z</updated>
+    
+    <content type="html">&lt;p&gt;本文总结了部分冷门但是比较有用的&lt;code&gt;Linux&lt;/code&gt;命令, 以备查阅。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Commands&quot;&gt;&lt;a href=&quot;#Commands&quot; class=&quot;headerlink&quot; title=&quot;Commands&quot;&gt;&lt;/a&gt;Commands&lt;/h3&gt;&lt;h4 id=&quot;apropos&quot;&gt;&lt;a href=&quot;#apropos&quot; class=&quot;headerlink&quot; title=&quot;apropos&quot;&gt;&lt;/a&gt;apropos&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;用法: &lt;code&gt;apropos keyword&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;用途: 用于查找拼写相类似或者发音相类似的命令，在记不准确命令的情况下可以使用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;wc&quot;&gt;&lt;a href=&quot;#wc&quot; class=&quot;headerlink&quot; title=&quot;wc&quot;&gt;&lt;/a&gt;wc&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;用途: 统计指定文件中或标准输出中的words, lines, characters, bytes数目&lt;/li&gt;
+&lt;li&gt;参数:&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-l&lt;/code&gt;: lines数目&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-c&lt;/code&gt;: bytes数目&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-w&lt;/code&gt;: words数目&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-m&lt;/code&gt;: characters数目&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;示例:  &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;cat 1.txt | wc -lw&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;wc -lw 1.txt&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文总结了部分冷门但是比较有用的&lt;code&gt;Linux&lt;/code&gt;命令, 以备查阅。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Linux命令" scheme="http://yoursite.com/categories/Linux%E5%91%BD%E4%BB%A4/"/>
+    
+    
+      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+      <category term="Bash" scheme="http://yoursite.com/tags/Bash/"/>
+    
+  </entry>
   
   <entry>
     <title>g++常用编译选项</title>
