@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-06-28T14:09:34.000Z</updated>
+  <updated>2016-08-21T15:27:03.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2016/06/28/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B-%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B/"/>
     <id>http://yoursite.com/2016/06/28/Java多线程编程-创建线程/</id>
     <published>2016-06-28T12:25:05.000Z</published>
-    <updated>2016-06-28T14:09:34.000Z</updated>
+    <updated>2016-08-21T15:27:03.000Z</updated>
     
     <content type="html">&lt;p&gt;从本节开始，将通过一系列的文章博客介绍Java并发编程的相关内容。此处为第一篇，介绍Java多线程中线程的基本管理，包括线程创建，sleep以及中断等。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&quot;线程&quot;&gt;&lt;a href=&quot;#线程&quot; class=&quot;headerlink&quot; title=&quot;线程&quot;&gt;&lt;/a&gt;线程&lt;/h3&gt;&lt;p&gt;&lt;code&gt;Java&lt;/code&gt;语言中采用的单线程模型，也就是在程序中不手动唤起新的线程时，默认就采用单个线程运行任务。需要注意的是，虽然只是采用单线程运行任务，但并不代表只启动一个线程，比如还会有线程负责垃圾回收等。&lt;br&gt;在执行&lt;code&gt;Java&lt;/code&gt;命令时，操作系统默认会启动一个&lt;code&gt;JVM&lt;/code&gt;进程，进程会同时创建几个线程，其中的主线程负责任务运行。&lt;/p&gt;
@@ -81,7 +81,7 @@
     <link href="http://yoursite.com/2016/05/24/Linux%E5%91%BD%E4%BB%A4-losf/"/>
     <id>http://yoursite.com/2016/05/24/Linux命令-losf/</id>
     <published>2016-05-24T03:26:07.000Z</published>
-    <updated>2016-05-24T03:34:56.000Z</updated>
+    <updated>2016-08-21T15:27:03.000Z</updated>
     
     <content type="html">&lt;p&gt;lsof(list open files)是一个列出当前系统打开文件的工具。在linux环境下，任何事物都以文件的形式存在，通过文件不仅仅可以访问常规数据，还可以访问网络连接和硬件。所以如传输控制协议 (TCP) 和用户数据报协议 (UDP) 套接字等，系统在后台都为该应用程序分配了一个文件描述符，无论这个文件的本质如何，该文件描述符为应用程序与基础操作系统之间的交互提供了通用接口。因为应用程序打开文件的描述符列表提供了大量关于这个应用程序本身的信息，因此通过lsof工具能够查看这个列表对系统监测以及排错将是很有帮助的。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -118,7 +118,7 @@
     <link href="http://yoursite.com/2016/05/23/Linux-%E9%83%A8%E5%88%86%E5%86%B7%E9%97%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/"/>
     <id>http://yoursite.com/2016/05/23/Linux-部分冷门命令总结/</id>
     <published>2016-05-23T02:44:51.000Z</published>
-    <updated>2016-05-24T03:25:32.000Z</updated>
+    <updated>2016-08-21T15:27:03.000Z</updated>
     
     <content type="html">&lt;p&gt;本文总结了部分冷门但是比较有用的&lt;code&gt;Linux&lt;/code&gt;命令, 以备查阅。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&quot;Commands&quot;&gt;&lt;a href=&quot;#Commands&quot; class=&quot;headerlink&quot; title=&quot;Commands&quot;&gt;&lt;/a&gt;Commands&lt;/h3&gt;&lt;h4 id=&quot;apropos&quot;&gt;&lt;a href=&quot;#apropos&quot; class=&quot;headerlink&quot; title=&quot;apropos&quot;&gt;&lt;/a&gt;apropos&lt;/h4&gt;&lt;ul&gt;
@@ -159,7 +159,7 @@
     <link href="http://yoursite.com/2016/05/19/g-%E5%B8%B8%E7%94%A8%E7%BC%96%E8%AF%91%E9%80%89%E9%A1%B9/"/>
     <id>http://yoursite.com/2016/05/19/g-常用编译选项/</id>
     <published>2016-05-19T08:46:27.000Z</published>
-    <updated>2016-05-19T11:17:08.000Z</updated>
+    <updated>2016-08-21T15:27:03.000Z</updated>
     
     <content type="html">&lt;p&gt;本篇博文主要汇总总结&lt;code&gt;g++&lt;/code&gt;和&lt;code&gt;gcc&lt;/code&gt;编译器常用的编译选项，以备以后查看。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&quot;编译过程选项&quot;&gt;&lt;a href=&quot;#编译过程选项&quot; class=&quot;headerlink&quot; title=&quot;编译过程选项&quot;&gt;&lt;/a&gt;编译过程选项&lt;/h3&gt;&lt;ul&gt;
@@ -235,7 +235,7 @@
     <link href="http://yoursite.com/2016/05/18/C-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B%E8%A7%A3%E6%9E%90/"/>
     <id>http://yoursite.com/2016/05/18/C-编译过程解析/</id>
     <published>2016-05-18T09:35:04.000Z</published>
-    <updated>2016-05-19T08:46:51.000Z</updated>
+    <updated>2016-08-21T15:27:03.000Z</updated>
     
     <content type="html">&lt;p&gt;本篇文章解析&lt;code&gt;C++&lt;/code&gt;的编译过程，并且说明如何编译成静态库，动态库以及动态库的加载过程。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&quot;C-编译过程&quot;&gt;&lt;a href=&quot;#C-编译过程&quot; class=&quot;headerlink&quot; title=&quot;C++ 编译过程&quot;&gt;&lt;/a&gt;C++ 编译过程&lt;/h3&gt;&lt;p&gt;目前C++的编译过程包括四个阶段，分别为&lt;code&gt;Proprocessing&lt;/code&gt;, &lt;code&gt;Compilation&lt;/code&gt;, &lt;code&gt;Assembly&lt;/code&gt;和&lt;code&gt;Linking&lt;/code&gt;四个阶段, 四个阶段对应使用的工具分别是&lt;code&gt;preprocessor&lt;/code&gt;, &lt;code&gt;compiler&lt;/code&gt;, &lt;code&gt;assembler&lt;/code&gt;和&lt;code&gt;linker&lt;/code&gt;. 编译的四个阶段如下图所示:&lt;br&gt;&lt;img src=&quot;http://faculty.cs.niu.edu/~mcmahon/CS241/Images/compile.png&quot; alt=&quot;C++ Compile Process&quot;&gt;&lt;/p&gt;
@@ -329,7 +329,7 @@
     <link href="http://yoursite.com/2016/04/26/%E5%8F%AA%E7%94%A8%E4%BD%8D%E8%BF%90%E7%AE%97%E5%AE%9E%E7%8E%B0%E4%B8%A4%E4%B8%AA%E6%95%B4%E6%95%B0%E5%A4%A7%E5%B0%8F%E6%AF%94%E8%BE%83/"/>
     <id>http://yoursite.com/2016/04/26/只用位运算实现两个整数大小比较/</id>
     <published>2016-04-26T11:05:52.000Z</published>
-    <updated>2016-04-26T11:05:52.000Z</updated>
+    <updated>2016-08-21T15:27:03.000Z</updated>
     
     <content type="html">&lt;p&gt;据说是某软的面试题, 只用位运算，不用四则运算以及比较运算符比较两个无符号整数的大小, 时间复杂度限制在O(logL)之内。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -361,7 +361,7 @@
     <link href="http://yoursite.com/2016/04/25/C-%E6%B3%9B%E5%9E%8B%E7%AE%97%E6%B3%95%E7%B4%A2%E5%BC%95/"/>
     <id>http://yoursite.com/2016/04/25/C-泛型算法索引/</id>
     <published>2016-04-25T11:08:04.000Z</published>
-    <updated>2016-04-25T11:55:36.000Z</updated>
+    <updated>2016-08-21T15:27:03.000Z</updated>
     
     <content type="html">&lt;p&gt;C++泛型算法除了常用的&lt;code&gt;sort&lt;/code&gt;, &lt;code&gt;fill&lt;/code&gt;等之外，还有其他的很多的不常用的泛型算法，本篇文章就对&lt;code&gt;C++泛型算法&lt;/code&gt;做一个索引列表，以便查询。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;&amp;lt;algorithm&amp;gt;&lt;/code&gt;头文件定义了一系列函数，这些函数会在一定范围之内的元素(ranges of elements)上进行操作。&lt;/p&gt;
@@ -416,7 +416,7 @@
     <link href="http://yoursite.com/2016/04/19/GNU-Linux%E5%8E%8B%E7%BC%A9%E8%A7%A3%E5%8E%8B%E5%91%BD%E4%BB%A4%E6%B1%87%E6%80%BB/"/>
     <id>http://yoursite.com/2016/04/19/GNU-Linux压缩解压命令汇总/</id>
     <published>2016-04-19T15:08:44.000Z</published>
-    <updated>2016-04-20T09:20:11.000Z</updated>
+    <updated>2016-08-21T15:27:03.000Z</updated>
     
     <content type="html">&lt;p&gt;&lt;code&gt;GNU\Linux&lt;/code&gt;下压缩和解压命令比较多，文档汇总了常见的的压缩解压命令，以便作为工具随时查阅。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&quot;tar-gz&quot;&gt;&lt;a href=&quot;#tar-gz&quot; class=&quot;headerlink&quot; title=&quot;.tar.gz&quot;&gt;&lt;/a&gt;.tar.gz&lt;/h3&gt;&lt;ul&gt;
@@ -559,7 +559,7 @@
     <link href="http://yoursite.com/2016/04/19/LXC/"/>
     <id>http://yoursite.com/2016/04/19/LXC/</id>
     <published>2016-04-18T16:40:04.000Z</published>
-    <updated>2016-04-18T16:42:42.000Z</updated>
+    <updated>2016-08-21T15:27:03.000Z</updated>
     
     <content type="html">&lt;p&gt;&lt;code&gt;Linux Container(LXC)&lt;/code&gt;是Linux系统上的虚拟化技术，用于建立一个&lt;code&gt;Sandbox&lt;/code&gt;，来运行一些不信任的程序。这篇文章是在&lt;code&gt;CentOS&lt;/code&gt;系统上安装和使用&lt;code&gt;Linux Container&lt;/code&gt;。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -614,7 +614,7 @@
     <link href="http://yoursite.com/2016/04/18/%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/"/>
     <id>http://yoursite.com/2016/04/18/最长上升子序列/</id>
     <published>2016-04-17T17:45:53.000Z</published>
-    <updated>2016-04-18T04:40:41.000Z</updated>
+    <updated>2016-08-21T15:27:03.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;LIS介绍&quot;&gt;&lt;a href=&quot;#LIS介绍&quot; class=&quot;headerlink&quot; title=&quot;LIS介绍&quot;&gt;&lt;/a&gt;LIS介绍&lt;/h2&gt;&lt;p&gt;最长上升子序列(Longest Increasing Subsequence), 简称&lt;code&gt;LIS&lt;/code&gt;, 是经典的动态规划题目。给定一个序列，例如&lt;code&gt;[10, 9, 2, 5, 3, 7, 101, 18]&lt;/code&gt;,&lt;br&gt;最长的上升子序列为&lt;code&gt;[2, 3, 7, 101]&lt;/code&gt;, 长度为&lt;code&gt;4&lt;/code&gt;。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -647,7 +647,7 @@
     <link href="http://yoursite.com/2016/04/18/LeetCode-33%E9%A2%98%E5%92%8C81%E9%A2%98/"/>
     <id>http://yoursite.com/2016/04/18/LeetCode-33题和81题/</id>
     <published>2016-04-17T17:42:23.000Z</published>
-    <updated>2016-04-18T04:40:41.000Z</updated>
+    <updated>2016-08-21T15:27:03.000Z</updated>
     
     <content type="html">&lt;p&gt;二分查找的灵活运用，对排序数组某一部分进行翻转，然后使用二分查找算法继续以&lt;code&gt;log(N)&lt;/code&gt;时间查找元素。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;Question&quot;&gt;&lt;a href=&quot;#Question&quot; class=&quot;headerlink&quot; title=&quot;Question&quot;&gt;&lt;/a&gt;Question&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;33&lt;/strong&gt;: &lt;a href=&quot;https://leetcode.com/problems/search-in-rotated-sorted-array/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Search in Rotated Sorted Array&lt;/a&gt;&lt;br&gt;&lt;strong&gt;81&lt;/strong&gt;: &lt;a href=&quot;https://leetcode.com/problems/search-in-rotated-sorted-array-ii/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Search in Rotated Sorted Array II&lt;/a&gt;&lt;/p&gt;
@@ -694,7 +694,7 @@
     <link href="http://yoursite.com/2016/04/18/LeetCode-116%E7%9A%84%E4%B8%89%E7%A7%8D%E8%A7%A3%E6%B3%95/"/>
     <id>http://yoursite.com/2016/04/18/LeetCode-116的三种解法/</id>
     <published>2016-04-17T16:51:43.000Z</published>
-    <updated>2016-04-18T04:40:41.000Z</updated>
+    <updated>2016-08-21T15:27:03.000Z</updated>
     
     <content type="html">&lt;p&gt;LeetCode 116二叉树next指针变换的题目，采用了BFS, Recursion Version和NO-Recursion Version三种方式实现。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
