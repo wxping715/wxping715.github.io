@@ -404,18 +404,18 @@
 <li><code>-v</code>: 显示打包过程中的输出信息</li>
 <li><code>-x</code>: 将库文件中的指定的目标文件解压到当前目录，如果没有指定，则解压所有的目标文件</li>
 </ul>
-<p>生成静态库文件的方式如下:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ g++ -c x1.cpp x2.cpp ......</span><br><span class="line">$ ar crv libname.a x1.o x2.o</span><br></pre></td></tr></table></figure></p>
-<p>在编译生成动态库的目标文件时，必须加上选项<code>-fPIC</code>, 表示生成位置无关的目标代码，打包成动态库文件的生成方式如下:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ g++ -c <span class="_">-f</span>PIC x1.cpp x2.cpp</span><br><span class="line">$ g++ -shared -o libname.so x1.o x2.o</span><br></pre></td></tr></table></figure></p>
-<p>也可以直接从源文件生成动态共享库<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ g++ <span class="_">-f</span>PIC -shared -o libname.so x1.cpp x2.cpp</span><br></pre></td></tr></table></figure></p>
+<p>生成静态库文件的方式如下:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ g++ -c x1.cpp x2.cpp ......</div><div class="line">$ ar crv libname.a x1.o x2.o</div></pre></td></tr></table></figure></p>
+<p>在编译生成动态库的目标文件时，必须加上选项<code>-fPIC</code>, 表示生成位置无关的目标代码，打包成动态库文件的生成方式如下:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ g++ -c <span class="_">-f</span>PIC x1.cpp x2.cpp</div><div class="line">$ g++ -shared -o libname.so x1.o x2.o</div></pre></td></tr></table></figure></p>
+<p>也可以直接从源文件生成动态共享库<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ g++ <span class="_">-f</span>PIC -shared -o libname.so x1.cpp x2.cpp</div></pre></td></tr></table></figure></p>
 <h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><ol>
 <li><p>在Linux平台指定使用<code>C++</code>标准库执行命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">g++ -std=c++11 input.cxx -o a.out</span><br><span class="line">g++ -std=gnu++11 input.cxx -o a.out</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">g++ -std=c++11 input.cxx -o a.out</div><div class="line">g++ -std=gnu++11 input.cxx -o a.out</div></pre></td></tr></table></figure>
 </li>
 <li><p><code>Mac OS X</code> before Mavericks</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">g++ -std=c++11 -stdlib=libc++ input.cxx -o a.out</span><br><span class="line">g++ -std=gnu++11 -stdlib=libc++ input.cxx -o a.out</span><br><span class="line">clang++ -std=c++11 -stdlib=libc++ input.cxx -o a.out</span><br><span class="line">clang++ -std=gnu++11 -stdlib=libc++ input.cxx -o a.out</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">g++ -std=c++11 -stdlib=libc++ input.cxx -o a.out</div><div class="line">g++ -std=gnu++11 -stdlib=libc++ input.cxx -o a.out</div><div class="line">clang++ -std=c++11 -stdlib=libc++ input.cxx -o a.out</div><div class="line">clang++ -std=gnu++11 -stdlib=libc++ input.cxx -o a.out</div></pre></td></tr></table></figure>
 </li>
 <li><p><code>Mac OS X</code> since Mavericks</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">clang++ -std=c++11 input.cxx -o a.out</span><br><span class="line">clang++ -std=gnu++11 input.cxx -o a.out</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">clang++ -std=c++11 input.cxx -o a.out</div><div class="line">clang++ -std=gnu++11 input.cxx -o a.out</div></pre></td></tr></table></figure>
 </li>
 </ol>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
@@ -540,7 +540,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">15</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -557,7 +557,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="proxy,node.js," />
 
 
 
@@ -82,15 +82,16 @@
 
 
 
-<meta name="description" content="做一个有思想的人">
-<meta property="og:type" content="website">
-<meta property="og:title" content="飞翔的猫">
-<meta property="og:url" content="http://yoursite.com/archives/2016/06/index.html">
+<meta name="description" content="本文尝试通过node.js搭建HTTP/HTTPS代理。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Build_HTTP/HTTPS_Proxy">
+<meta property="og:url" content="http://yoursite.com/2016/10/05/Build-HTTP-HTTPS-Proxy/index.html">
 <meta property="og:site_name" content="飞翔的猫">
-<meta property="og:description" content="做一个有思想的人">
+<meta property="og:description" content="本文尝试通过node.js搭建HTTP/HTTPS代理。">
+<meta property="og:updated_time" content="2016-10-05T08:47:04.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="飞翔的猫">
-<meta name="twitter:description" content="做一个有思想的人">
+<meta name="twitter:title" content="Build_HTTP/HTTPS_Proxy">
+<meta name="twitter:description" content="本文尝试通过node.js搭建HTTP/HTTPS代理。">
 
 
 
@@ -108,7 +109,7 @@
   };
 </script>
 
-  <title> Archive | 飞翔的猫 </title>
+  <title> Build_HTTP/HTTPS_Proxy | 飞翔的猫 </title>
 </head>
 
 <a href="https://github.com/wxping715/wxping715.github.io" style="position: absolute; top: 90px; left: 0; border: 0;"><img src="https://camo.githubusercontent.com/121cd7cbdc3e4855075ea8b558508b91ac463ac2/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_green_007200.png"></a>
@@ -139,7 +140,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right  page-archive  ">
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -270,66 +271,167 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      Um..! 15 posts in total. Keep on posting.
-    </span>
-
+  <div id="posts" class="posts-expand">
     
 
-      
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Build_HTTP/HTTPS_Proxy
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-10-05T16:41:10+08:00" content="2016-10-05">
+              2016-10-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/05/Build-HTTP-HTTPS-Proxy/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/10/05/Build-HTTP-HTTPS-Proxy/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/10/05/Build-HTTP-HTTPS-Proxy/" class="leancloud_visitors" data-flag-title="Build_HTTP/HTTPS_Proxy">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o">本文总阅读量</i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
       
       
 
       
+        <p>本文尝试通过<code>node.js</code>搭建HTTP/HTTPS代理。</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">var http = require(&apos;http&apos;);</div><div class="line">var net = require(&apos;net&apos;);</div><div class="line">var url = require(&apos;url&apos;);</div><div class="line">// console.log(&quot;start server&quot;);</div><div class="line">function request(cReq, cRes) &#123;</div><div class="line">    var u = url.parse(cReq.url);</div><div class="line">    var options = &#123;</div><div class="line">        hostname : u.hostname,</div><div class="line">        port     : u.port || 80,</div><div class="line">        path     : u.path,       </div><div class="line">        method     : cReq.method,</div><div class="line">        headers     : cReq.headers</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    var pReq = http.request(options, function(pRes) &#123;</div><div class="line">        cRes.writeHead(pRes.statusCode, pRes.headers);</div><div class="line">        pRes.pipe(cRes);</div><div class="line">    &#125;).on(&apos;error&apos;, function(e) &#123;</div><div class="line">        cRes.end();</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    cReq.pipe(pReq);</div><div class="line">&#125;</div><div class="line"></div><div class="line">function connect(cReq, cSock) &#123;</div><div class="line">    var u = url.parse(&apos;http://&apos; + cReq.url);</div><div class="line"></div><div class="line">    var pSock = net.connect(u.port, u.hostname, function() &#123;</div><div class="line">        cSock.write(&apos;HTTP/1.1 200 Connection Established\r\n\r\n&apos;);</div><div class="line">        pSock.pipe(cSock);</div><div class="line">    &#125;).on(&apos;error&apos;, function(e) &#123;</div><div class="line">        cSock.end();</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    cSock.pipe(pSock);</div><div class="line">&#125;</div><div class="line"></div><div class="line">http.createServer()</div><div class="line">    .on(&apos;request&apos;, request)</div><div class="line">    .on(&apos;connect&apos;, connect)</div><div class="line">    .listen(8888, &apos;0.0.0.0&apos;);</div></pre></td></tr></table></figure>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="https://imququ.com/post/web-proxy.html" target="_blank" rel="external">HTTP 代理原理及实现（一）</a></li>
+</ol>
+
+      
+    </div>
+    
+    <div>
+      
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/proxy/" rel="tag">#proxy</a>
+          
+            <a href="/tags/node-js/" rel="tag">#node.js</a>
+          
         </div>
       
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/26/Mac多版本Numpy引入问题/" rel="next" title="Mac多版本Numpy引入问题">
+                <i class="fa fa-chevron-left"></i> Mac多版本Numpy引入问题
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/06/28/Java多线程编程-创建线程/" itemprop="url">
-              
-                <span itemprop="name">Java多线程编程-线程基本操作</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-06-28T20:25:05+08:00"
-              content="2016-06-28" >
-          06-28
-        </time>
-      </div>
-
-    </header>
+      
+    </footer>
   </article>
 
 
 
-    
-
-  </section>
-
-  
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
         </div>
@@ -337,6 +439,17 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -356,8 +469,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -443,6 +565,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">1.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -553,11 +686,9 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
 
 
   
@@ -575,9 +706,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'talus';
-      var disqus_identifier = 'archives/2016/06/index.html';
-      var disqus_title = '';
-      var disqus_url = '';
+      var disqus_identifier = '2016/10/05/Build-HTTP-HTTPS-Proxy/';
+      var disqus_title = 'Build_HTTP/HTTPS_Proxy';
+      var disqus_url = 'http://yoursite.com/2016/10/05/Build-HTTP-HTTPS-Proxy/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
@@ -588,6 +719,8 @@
       }
 
       run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
       
     </script>
   
