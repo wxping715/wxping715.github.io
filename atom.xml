@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-10-05T08:47:04.000Z</updated>
+  <updated>2017-03-27T11:59:06.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>KMP 算法理解</title>
+    <link href="http://yoursite.com/2017/03/27/kmp-algorithm/"/>
+    <id>http://yoursite.com/2017/03/27/kmp-algorithm/</id>
+    <published>2017-03-27T12:25:05.000Z</published>
+    <updated>2017-03-27T11:59:06.000Z</updated>
+    
+    <content type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;有用的两个链接&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;关于Next数组的理解&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/tangzhengyue/p/4315393.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;怎么计算Next数组&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;有用的两个链接&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html&quot;
+    
+    </summary>
+    
+      <category term="算法" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Build_HTTP/HTTPS_Proxy</title>

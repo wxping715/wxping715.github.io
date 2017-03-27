@@ -4,6 +4,18 @@
   
     
     <entry>
+      <title><![CDATA[KMP 算法理解]]></title>
+      <url>http://yoursite.com/2017/03/27/kmp-algorithm/</url>
+      <content type="html"><![CDATA[<a id="more"></a>
+<p>有用的两个链接</p>
+<ol>
+<li><a href="http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html" target="_blank" rel="external">关于Next数组的理解</a></li>
+<li><a href="http://www.cnblogs.com/tangzhengyue/p/4315393.html" target="_blank" rel="external">怎么计算Next数组</a></li>
+</ol>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Build_HTTP/HTTPS_Proxy]]></title>
       <url>http://yoursite.com/2016/10/05/Build-HTTP-HTTPS-Proxy/</url>
       <content type="html"><![CDATA[<p>本文尝试通过<code>node.js</code>搭建HTTP/HTTPS代理。</p>
