@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>bq_graph_best_practice</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1
+id="bigquery-graph-performance-best-practices-and-optimization-strategies">BigQuery
+Graph Performance Best Practices and Optimization Strategies</h1>
+<h2 id="overview">Overview</h2>
+<p>This document summarizes performance best practices for BigQuery
+Graph, derived from internal engineering guides and query optimization
+case studies. It is designed to be consumed by AI agents to understand
+how to optimize graph workloads on BigQuery.</p>
+<h2 id="user-best-practices-schema-query-design">1. User Best Practices:
+Schema &amp; Query Design</h2>
+<h3 id="graph-schema-design">1.1 Graph Schema Design</h3>
+<ul>
+<li><strong>Explicit Property Definition</strong>:
+<ul>
+<li><strong>DO</strong>: Explicitly list properties used in the graph.
+<code>PROPERTIES (id, create_time)</code></li>
+<li><strong>AVOID</strong>: <code>PROPERTIES ALL COLUMNS</code>. This
+pulls in unused columns, increasing scan I/O.</li>
+</ul></li>
+<li><strong>Constraints</strong>:
+<ul>
+<li>Define <code>PRIMARY KEY</code> and <code>FOREIGN KEY</code>
+constraints as <code>NOT ENFORCED</code>.</li>
+<li><em>Benefit</em>: Enables aggressive join elimination and scan
+reduction.</li>
+<li><em>Caveat</em>: Data must actually be unique/referential; otherwise
+results may be incorrect.</li>
+</ul></li>
+</ul>
+<h3 id="query-writing-patterns">1.2 Query Writing Patterns</h3>
+<ul>
+<li><strong>Start with Low Cardinality</strong>:
+<ul>
+<li>Write traversals starting from the most selective node (e.g.,
+specific ID or highly filtered subset).</li>
+<li><em>Example</em>:
+<code>(p:Person {id: 10})-[...]-&gt;(a:Account)</code> is better than
+<code>(p:Person)-[...]-&gt;(a:Account {id: 10})</code> if the engine
+doesn’t reorder it (though quantified path opt helps here).</li>
+</ul></li>
+<li><strong>Directional Traversal</strong>:
+<ul>
+<li><strong>Prefer</strong>: <code>(a)-[e]-&gt;(b)</code></li>
+<li><strong>Avoid</strong>: <code>(a)-[e]-(b)</code> (Undirected).
+Undirected traversal effectively unions both directions, doubling work
+and preventing some optimizations.</li>
+</ul></li>
+<li><strong>Specific Labels</strong>:
+<ul>
+<li>Always specify node/edge labels.
+<code>(a:Account)-[t:Transfer]-&gt;(b:Account)</code></li>
+<li>Omission causes the engine to scan <em>all</em> possible labels that
+could fit.</li>
+</ul></li>
+<li><strong>Single MATCH Statement</strong>:
+<ul>
+<li>Prefer one linear <code>MATCH</code> clause over multiple
+disconnected <code>MATCH</code> clauses joined by variables, to allow
+global cardinality estimation.</li>
+</ul></li>
+<li><strong>ANY / ANY SHORTEST</strong>:
+<ul>
+<li>Use <code>MATCH ANY SHORTEST</code> or <code>MATCH ANY</code> when
+you only need <em>connectivity</em> checks or <em>one</em> path, rather
+than <em>all</em> paths.</li>
+</ul></li>
+</ul>
+<h3 id="advanced-query-tuning-adapted-from-spanner-graph">2.3 Advanced
+Query Tuning (Adapted from Spanner Graph)</h3>
+<ul>
+<li><strong>Across MATCH Statements</strong>:
+<ul>
+<li><strong>Practice</strong>: When using <code>NEXT MATCH</code> or
+multiple linear <code>MATCH</code> statements, <strong>re-specify
+labels</strong> for variables even if they were defined in a previous
+step.</li>
+<li><em>Example</em>:
+<code>MATCH (n:Account) ... NEXT MATCH (n:Account)-[...]-(m)</code></li>
+<li><em>Why</em>: Helps the optimizer immediately resolve types for
+<code>n</code> in the second fragment without deep dependency
+analysis.</li>
+</ul></li>
+<li><strong>Handling Supernodes (Limit Edge Traversal)</strong>:
+<ul>
+<li><strong>Problem</strong>: Traversing from high-cardinality nodes
+(“supernodes”) can cause massive fan-out and slow queries.</li>
+<li><strong>Spanner Pattern</strong>: Uses <code>IS_FIRST</code> to
+limit edges per node (e.g., “latest 5 transfers”).</li>
+<li><strong>BigQuery Adaptation</strong>: BigQuery Graph does not
+support <code>IS_FIRST</code>. Instead, <strong>use
+<code>ROW_NUMBER()</code></strong>.</li>
+<li><strong>Implementation</strong>: Apply a <code>ROW_NUMBER()</code>
+filter in a subquery or <code>LET</code> clause to select the top-k
+edges <em>before</em> or <em>during</em> traversal usage.</li>
+<li><em>Snippet</em>:
+<code>sql     -- Equivalent to IS_FIRST logic (use QUALIFY or Subquery)     QUALIFY ROW_NUMBER() OVER (         PARTITION BY SOURCE_NODE_ID(e)          ORDER BY e.create_time DESC     ) &lt;= @limit</code></li>
+</ul></li>
+</ul>
+<hr />
+<h2 id="case-study-fraud-network-query-optimization">2. Case Study:
+Fraud Network Query Optimization</h2>
+<p>This section analyzes a real-world optimization of a fraud detection
+query.</p>
+<h3 id="scenario">2.1 Scenario</h3>
+<ul>
+<li><strong>Goal</strong>: Detect “indirect fraud connections” (Source
+-&gt; Hop1 -&gt; Hop2).
+<ul>
+<li>Path:
+<code>SourceUser -&gt; [connected_to] -&gt; Hop1User -&gt; [connected_to] -&gt; Hop2User</code>.</li>
+<li>Conditions: Edges must be recent (&lt; 1 hour); Hop2User is “high
+risk”.</li>
+</ul></li>
+<li><strong>Original Query Issues</strong>:
+<ul>
+<li>Likely scans too many paths (High Fan-out).</li>
+<li>Computes full 2-hop paths for all users before filtering.</li>
+</ul></li>
+</ul>
+<h3 id="optimization-technique-a-early-aggregation">2.2 Optimization
+Technique A: Early Aggregation</h3>
+<p>If the intermediate edge (<code>first_hop</code>) details are
+<em>not</em> needed in the final output (or can be aggregated), break
+the traversal: 1. <strong>Step 1</strong>: Traverse
+<code>Source -&gt; Hop1</code>. 2. <strong>Step 2</strong>:
+<code>WITH DISTINCT source_user, first_hop_user</code>
+(Deduplicate/Aggregate). 3. <strong>Step 3</strong>: Traverse
+<code>Hop1 -&gt; Hop2</code>.</p>
+<p><em>Why it works</em>: Prevents combinatorial explosion. If User A
+connects to User B via 50 edges, and B connects to C via 50 edges: *
+Standard: 50 * 50 = 2500 paths. * Early Aggregation: 1 pair (A, B) -&gt;
+50 paths to C = 50 paths (assuming we only care about reachability).</p>
+<h3 id="optimization-technique-b-sampling-limit-edges">2.3 Optimization
+Technique B: Sampling (Limit Edges)</h3>
+<p>If the user has massive connectivity (supernode), process only a
+subset of recent edges. * <strong>Strategy</strong>:
+<code>ARRAY_AGG(first_hop ORDER BY created_at DESC LIMIT 5)</code>. *
+<strong>Implementation</strong>: 1. Match
+<code>Source -&gt; Hop1</code>. 2.
+<code>WITH ... ARRAY_AGG(...) as edges</code>. 3. <code>UNNEST</code>
+(flatten) the limited edges. 4. Continue traversal to
+<code>Hop2</code>.</p>
+<h3 id="summary-of-case-study-recommendations">2.4 Summary of Case Study
+Recommendations</h3>
+<ul>
+<li><strong>Use <code>MATCH ANY SHORTEST</code></strong>: For simple
+connectivity checks.</li>
+<li><strong>Filter Early</strong>: Apply “high risk” filters on Hop2 and
+“recent time” filters on edges immediately.</li>
+<li><strong>Limit Fan-out</strong>: Use aggregation or sampling for
+high-degree nodes.</li>
+</ul>
+<h2 id="references-documentation">4. References &amp; Documentation</h2>
+<ul>
+<li><strong>Spanner Graph Overview</strong>: <a
+href="https://cloud.google.com/spanner/docs/reference/standard-sql/graph-intro">Introduction
+to Spanner Graph</a></li>
+<li><strong>Graph Schema Statements (DDL)</strong>: <a
+href="https://cloud.google.com/spanner/docs/reference/standard-sql/graph-schema-statements">CREATE
+PROPERTY GRAPH, etc.</a></li>
+<li><strong>Graph Query Statements (DQL)</strong>: <a
+href="https://cloud.google.com/spanner/docs/reference/standard-sql/graph-query-statements">MATCH,
+RETURN, etc.</a>
+<ul>
+<li><em>Includes Graph Patterns (MATCH), Graph Hints, and GQL
+Subqueries.</em></li>
+</ul></li>
+<li><strong>Graph Data Types</strong>: <a
+href="https://cloud.google.com/spanner/docs/reference/standard-sql/data-types#graph_element_type">Graph
+Element, Graph Path</a></li>
+<li><strong>Graph Operators &amp; Predicates</strong>: <a
+href="https://cloud.google.com/spanner/docs/reference/standard-sql/operators#graph_concatenation_operator">Concatenation,
+Labels, Property Existence</a>
+<ul>
+<li><em>Includes <code>||</code> (Concatenation),
+<code>IS SOURCE</code>, <code>IS DESTINATION</code>,
+<code>IS LABELED</code>, <code>PROPERTY_EXISTS</code>,
+<code>SAME</code>.</em></li>
+</ul></li>
+<li><strong>Graph Functions</strong>: <a
+href="https://cloud.google.com/spanner/docs/reference/standard-sql/functions-and-operators">Functions
+&amp; Operators</a>
+<ul>
+<li><em>Includes <code>NODES</code>, <code>EDGES</code>,
+<code>LABELS</code>, <code>PROPERTIES</code>,
+<code>Element Definition definitions</code>, <code>TO_JSON</code> in the
+alphabetical list.</em></li>
+</ul></li>
+<li><strong>Standard SQL Subqueries</strong>: <a
+href="https://cloud.google.com/spanner/docs/reference/standard-sql/subqueries">Subqueries</a></li>
+<li><strong>Conditional Expressions</strong>: <a
+href="https://cloud.google.com/spanner/docs/reference/standard-sql/conditional_expressions">CASE,
+COALESCE, IF, etc.</a></li>
+</ul>
+</body>
+</html>
